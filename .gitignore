@@ -1,5 +1,14 @@
-.DS_store
+# vs code
+push_swap.dSYM/
+
+# program
 a.out
 push_swap
-main.c
+push_swap_asan
+
+# checker
+checker_Max
+
+# rest
+.DS_store
 *.txt
