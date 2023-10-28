@@ -1,5 +1,6 @@
 # vs code
 push_swap.dSYM/
+.vscode
 
 # program
 a.out

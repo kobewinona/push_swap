@@ -13,8 +13,8 @@ OBJS_DIR	= ./obj
 LIBS_DIR	= ./libs
 UTILS_DIR	= ./utils
 
-SRCS 		= $(addprefix $(SRCS_DIR)/, main.c)
-UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, init_stack.c)
+SRCS 		= $(addprefix $(SRCS_DIR)/, main.c init_stack.c)
+UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c)
 OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 OBJS		+= $(patsubst $(UTILS_DIR)/%.c,$(OBJS_DIR)/%.o,$(UTILS_SRCS))
 

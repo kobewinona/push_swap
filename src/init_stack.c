@@ -12,90 +12,76 @@
 
 #include "../includes/push_swap.h"
 
-// some arguments aren’t integers
-// some arguments are bigger than an integer
-// some arguments are duplicates
-// use checker to check all edge cases for invalid arguments
-
-static int	count_elements(int argc, char **argv)
+static int	update_stack(t_dlist **stack, long num)
 {
-	size_t	count;
+	t_dlist	*new_node;
+	t_dlist	*last_node;
+
+	new_node = (t_dlist *)malloc(sizeof(t_dlist));
+	if (!new_node)
+		return (ERROR);
+	new_node->num = num;
+	new_node->next = NULL;
+	if (!*stack)
+	{
+		new_node->prev = NULL;
+		*stack = new_node;
+	}
+	else
+	{
+		last_node = *stack;
+		while (last_node->next)
+			last_node = last_node->next;
+		new_node->prev = last_node;
+		last_node->next = new_node;
+	}
+	return (1);
+}
+
+static int	is_element_valid(char *element)
+{
+	int	i;
+
+	i = 0;
+	while (element && element[i] != '\0')
+	{
+		if (!ft_isdigit(element[i]) && !ft_isspace(element[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
+t_dlist	*init_stack(int argc, char **argv)
+{
+	t_dlist	*stack;
 	char	**split_args;
+	char	*element;
 	int		i;
 	int		j;
-	
+
+	stack = NULL;
 	i = 0;
-	count = 0;
 	while (i < argc)
 	{
-		j = 0;
-		split_args = ft_split(argv[i], ' ');
-		if (split_args)
-		{
-			while (split_args[j++])
-				count++;
-		}
-		i++;
-	}
-	return (count);
-}
-
-static int	has_dublicates(int *stack)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (stack && stack[i])
-	{
-		j = 0;
-		while (stack[j])
-		{
-			if (i != j && stack[i] == stack[j])
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	*init_stack(int argc, char **argv)
-{
-	int		*stack;
-	char	**split_args;
-	long	num;
-	size_t	i;
-	size_t	j;
-	int		k;
-
-	stack = (int *)malloc((count_elements(argc, argv) + 1) * sizeof(int));
-	if (!stack)
-		return (NULL);
-	split_args = NULL;
-	i = 0;
-	k = 0;
-	while (k < argc)
-	{
-		split_args = ft_split(argv[k++], ' ');
+		split_args = ft_split(argv[i++], ' ');
 		if (!split_args)
-		{
-			free(stack);
 			return (NULL);
-		}
 		j = 0;
 		while (split_args && split_args[j])
 		{
-			num = ft_atol(split_args[j]);
-			if (num > INT_MAX)
+			element = split_args[j++];
+			if (!is_element_valid(element))
+			{
+				print_err_msg(INVALID_ARGS);
 				return (NULL);
-			stack[i] = num;
-			i++;
-			j++;
+			}
+			if (update_stack(&stack, ft_atol(element)) == ERROR)
+			{
+				print_err_msg(UNKNOWN_ERROR);
+				return (NULL);
+			}
 		}
 	}
-	stack[i] = 0;
-	if (has_dublicates(stack))
-		return (NULL);
 	return (stack);
 }
