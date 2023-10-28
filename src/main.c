@@ -19,20 +19,22 @@
 
 int	main(int argc, char **argv)
 {
-	t_dlist	*stack_a;
+	t_list	*args;
+	t_list	*temp;
 
+	args = NULL;
 	if (argc <= 1)
 	{
 		print_err_msg(NO_ARGS);
 		return (0);
 	}
-	stack_a = init_stack((argc - 1), (argv + 1));
-	if (!stack_a)
-		return (0);
-	while (stack_a)
+	args = parse_argv((argc - 1), (argv + 1));
+	temp = args;
+	while (temp)
 	{
-		ft_printf("(%d) -> ", stack_a->num);
-		stack_a = stack_a->next;
+		ft_printf("%s -> ", temp->content);
+		temp = temp->next;
 	}
+	ft_lstclear(&args, free);
 	return (1);
 }

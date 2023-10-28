@@ -13,10 +13,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libftprintf.h"
-# include <stdio.h>
-# include <stddef.h>
-# include <limits.h>
-# include <stdarg.h>
 
 // magic numbers
 # define NULL_TURM 1
@@ -43,7 +39,7 @@
 	"\t- some arguments are duplicates"
 
 # define UNKNOWN_ERROR "Unknown error occured\n\n" \
-	"*** Please try again:\n"
+	"*** Please try again:"
 
 // structures
 typedef struct s_dlist
@@ -55,6 +51,7 @@ typedef struct s_dlist
 
 // functions
 void	print_err_msg(char *err_msg);
+t_list	*parse_argv(int argc, char **argv);
 int		is_argv_valid(int argc, char **argv);
 t_dlist	*init_stack(int argc, char **argv);
 
