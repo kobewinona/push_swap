@@ -2,8 +2,8 @@ NAME		= push_swap
 ASAN_NAME	= push_swap_asan
 
 CC			= gcc
-CFLAGS		= -g -Wall -Wextra -Werror
-# CFLAGS		= -g
+# CFLAGS		= -g -Wall -Wextra -Werror
+CFLAGS		= -g
 ASAN_FLAGS	= -fsanitize=address
 RM			= rm -rf
 INCLUDES	= ./includes
@@ -14,8 +14,8 @@ OBJS_DIR	= ./obj
 LIBS_DIR	= ./libs
 UTILS_DIR	= ./utils
 
-SRCS 		= $(addprefix $(SRCS_DIR)/, main.c parse_argv.c is_argv_valid.c)
-UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c print_pmt_msg.c free_double_arr.c)
+SRCS 		= $(addprefix $(SRCS_DIR)/, main.c parse_argv.c is_argv_valid.c init_struct.c)
+UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c print_pmt_msg.c free_double_arr.c ft_dclstadd.c)
 OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 OBJS		+= $(patsubst $(UTILS_DIR)/%.c,$(OBJS_DIR)/%.o,$(UTILS_SRCS))
 

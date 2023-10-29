@@ -54,10 +54,13 @@ typedef struct s_dlist
 // - src
 t_list	*parse_argv(int argc, char **argv);
 int		is_argv_valid(t_list *args);
+t_dlist	*init_struct(t_list *args);
 
 // -utils
 void	print_err_msg(char *err_msg);
 void	print_pmt_msg(char *pmt_title, char *pmt_msg);
 void	free_double_arr(char **arr);
+t_dlist	*ft_dlstnew(long value);
+void	ft_dlstadd_back(t_dlist **dlst, t_dlist *new_node);
 
 #endif

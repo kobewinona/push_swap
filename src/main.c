@@ -14,27 +14,36 @@
 
 int	main(int argc, char **argv)
 {
-	t_list	*args;
-	t_list	*temp;
+	t_list	*args_lst;
+	t_dlist	*args_dclst;
+	t_dlist	*temp;
+	int		i;
 
-	args = NULL;
+	args_lst = NULL;
 	if (argc <= 1)
 	{
 		print_err_msg(NO_ARGS);
 		return (0);
 	}
-	args = parse_argv((argc - 1), (argv + 1));
-	if (!is_argv_valid(args))
+	args_lst = parse_argv((argc - 1), (argv + 1));
+	if (!is_argv_valid(args_lst))
 	{
-		ft_lstclear(&args, free);
+		ft_lstclear(&args_lst, free);
 		return (0);
 	}
-	temp = args;
-	while (temp)
+	args_dclst = init_struct(args_lst);
+	ft_lstclear(&args_lst, free);
+	if (!args_dclst)
+		return (0);
+	temp = args_dclst;
+	i = 0;
+	while (i < 15)
 	{
-		ft_printf("%s -> ", temp->content);
+		ft_printf("%d -> ", temp->num);
 		temp = temp->next;
+		i++;
 	}
-	ft_lstclear(&args, free);
+	// add dlstclear func to get rid of memory leaks
+	ft_lstclear(&args_lst, free);
 	return (1);
 }
