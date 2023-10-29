@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_err_msg.c                                    :+:      :+:    :+:   */
+/*   free_darr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 15:36:19 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/28 15:36:20 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/10/29 16:31:28 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/10/29 16:31:29 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	print_err_msg(char *err_msg)
+void	free_darr(char **arr)
 {
-	write(STDOUT_FILENO, BOLD, ft_strlen(BOLD));
-	write(STDOUT_FILENO, RED_COLOR, ft_strlen(RED_COLOR));
-	write(STDOUT_FILENO, "Error: ", 7);
-	write(STDOUT_FILENO, RESET_COLOR, ft_strlen(RESET_COLOR));
-	write(STDOUT_FILENO, REGULAR, ft_strlen(REGULAR));
-	ft_printf("%s\n", err_msg);
+	int	i;
+
+	i = 0;
+	while (arr && arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

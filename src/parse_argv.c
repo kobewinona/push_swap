@@ -12,19 +12,6 @@
 
 #include "../includes/push_swap.h"
 
-static void	free_split_argv(char **split_args)
-{
-	int	i;
-
-	i = 0;
-	while (split_args[i])
-	{
-		free(split_args[i]);
-		i++;
-	}
-	free(split_args);
-}
-
 static void	handle_split_argv(t_list **args, char **split_argv)
 {
 	char	*content;
@@ -37,12 +24,12 @@ static void	handle_split_argv(t_list **args, char **split_argv)
 		if (!content)
 		{
 			print_err_msg(UNKNOWN_ERROR);
-			free_split_argv(split_argv);
+			print_pmt_msg(RESTART_PROMPT, "");
+			free_darr(split_argv);
 			ft_lstclear(args, free);
 			exit(1);
 		}
 		ft_lstadd_back(args, ft_lstnew(content));
-		free(content);
 		i++;
 	}
 }
@@ -61,10 +48,11 @@ t_list	*parse_argv(int argc, char **argv)
 		if (!split_argv)
 		{
 			print_err_msg(UNKNOWN_ERROR);
+			print_pmt_msg(RESTART_PROMPT, "");
 			exit(1);
 		}
 		handle_split_argv(&args, split_argv);
-		free_split_argv(split_argv);
+		free_darr(split_argv);
 	}
 	return (args);
 }

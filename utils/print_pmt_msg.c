@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_err_msg.c                                    :+:      :+:    :+:   */
+/*   print_pmt_msg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 15:36:19 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/28 15:36:20 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/10/29 16:29:38 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/10/29 16:29:39 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	print_err_msg(char *err_msg)
+void	print_pmt_msg(char *pmt_title, char *pmt_msg)
 {
+	ft_printf("%s", pmt_title);
 	write(STDOUT_FILENO, BOLD, ft_strlen(BOLD));
-	write(STDOUT_FILENO, RED_COLOR, ft_strlen(RED_COLOR));
-	write(STDOUT_FILENO, "Error: ", 7);
-	write(STDOUT_FILENO, RESET_COLOR, ft_strlen(RESET_COLOR));
+	ft_printf("%s\n", pmt_msg);
 	write(STDOUT_FILENO, REGULAR, ft_strlen(REGULAR));
-	ft_printf("%s\n", err_msg);
 }

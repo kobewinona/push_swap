@@ -26,9 +26,15 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 	{
 		print_err_msg(NO_ARGS);
+		print_pmt_msg(VALID_ARGS_PROMPT, VALID_ARGS);
 		return (0);
 	}
 	args = parse_argv((argc - 1), (argv + 1));
+	if (!is_argv_valid(args))
+	{
+		ft_lstclear(&args, free);
+		return (0);
+	}
 	temp = args;
 	while (temp)
 	{
