@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 19:37:41 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/28 19:37:42 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/10/29 16:58:46 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/10/29 16:58:55 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	handle_split_argv(t_list **args, char **split_argv)
 		{
 			print_err_msg(UNKNOWN_ERROR);
 			print_pmt_msg(RESTART_PROMPT, "");
-			free_darr(split_argv);
+			free_double_arr(split_argv);
 			ft_lstclear(args, free);
 			exit(1);
 		}
@@ -52,7 +52,7 @@ t_list	*parse_argv(int argc, char **argv)
 			exit(1);
 		}
 		handle_split_argv(&args, split_argv);
-		free_darr(split_argv);
+		free_double_arr(split_argv);
 	}
 	return (args);
 }

@@ -15,7 +15,7 @@ LIBS_DIR	= ./libs
 UTILS_DIR	= ./utils
 
 SRCS 		= $(addprefix $(SRCS_DIR)/, main.c parse_argv.c is_argv_valid.c)
-UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c print_pmt_msg.c free_darr.c)
+UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c print_pmt_msg.c free_double_arr.c)
 OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 OBJS		+= $(patsubst $(UTILS_DIR)/%.c,$(OBJS_DIR)/%.o,$(UTILS_SRCS))
 

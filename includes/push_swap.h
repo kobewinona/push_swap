@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 17:03:21 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/27 17:03:22 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/10/29 17:00:05 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/10/29 17:00:12 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@
 # define BIGGER_THAN_INT "\t- some arguments are bigger than an integer\n"
 # define DUBLICATED "\t- some arguments are duplicates\n"
 
-# define VALID_ARGS_PROMPT "*** Please make sure that:\n"
-# define ARGS_PROVIDED "\t- at least 1 arg is provided\n"
-# define ARGS_ARE_TYPE_INT "\t- arguments are integers only\n"
-# define SPACE_SEPERATED "\t- arguments must be seperated by spaces\n"
-# define VALID_ARGS ARGS_PROVIDED ARGS_ARE_TYPE_INT SPACE_SEPERATED
-
 // structures
 typedef struct s_dlist
 {
@@ -64,6 +58,6 @@ int		is_argv_valid(t_list *args);
 // -utils
 void	print_err_msg(char *err_msg);
 void	print_pmt_msg(char *pmt_title, char *pmt_msg);
-void	free_darr(char **split_args);
+void	free_double_arr(char **arr);
 
 #endif
