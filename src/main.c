@@ -15,9 +15,9 @@
 int	main(int argc, char **argv)
 {
 	t_list	*args_lst;
-	t_dlist	*args_dclst;
-	t_dlist	*temp;
-	int		i;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	size_t	stack_size;
 
 	args_lst = NULL;
 	if (argc <= 1)
@@ -31,19 +31,38 @@ int	main(int argc, char **argv)
 		ft_lstclear(&args_lst, free);
 		return (0);
 	}
-	args_dclst = init_struct(args_lst);
-	ft_lstclear(&args_lst, free);
-	if (!args_dclst)
-		return (0);
-	temp = args_dclst;
-	i = 0;
-	while (i < 15)
+	stack_size = (argc - 1);
+	stack_a = init_stack(stack_size);
+	if (!stack_a)
 	{
-		ft_printf("%d -> ", temp->num);
-		temp = temp->next;
+		ft_lstclear(&args_lst, free);
+		return (0);
+	}
+	fill_stack(&stack_a, args_lst);
+	ft_lstclear(&args_lst, free);
+		
+	// print stack values
+	t_stack *temp1 = stack_a;
+	int i = 0;
+	while (i < stack_size)
+	{
+		ft_printf("%d -> ", temp1->num);
+		temp1 = temp1->next;
 		i++;
 	}
-	// add dlstclear func to get rid of memory leaks
-	ft_lstclear(&args_lst, free);
+	ft_printf("\n\n");
+	do_sa(&stack_a);
+	t_stack *temp2 = stack_a;
+	i = 0;
+	while (i < stack_size)
+	{
+		ft_printf("%d -> ", temp2->num);
+		temp2 = temp2->next;
+		i++;
+	}
+	ft_printf("\n\n");
+
+	// free on exit
+	free_stack(&stack_a);
 	return (1);
 }

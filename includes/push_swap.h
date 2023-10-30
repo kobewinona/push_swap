@@ -43,24 +43,28 @@
 # define DUBLICATED "\t- some arguments are duplicates\n"
 
 // structures
-typedef struct s_dlist
+typedef struct s_stack
 {
 	long			num;
-	struct s_dlist	*prev;
-	struct s_dlist	*next;
-}					t_dlist;
+	struct s_stack	*prev;
+	struct s_stack	*next;
+}					t_stack;
 
 // functions
 // - src
 t_list	*parse_argv(int argc, char **argv);
 int		is_argv_valid(t_list *args);
-t_dlist	*init_struct(t_list *args);
+t_stack	*init_stack(size_t size);
+void	fill_stack(t_stack **stack, t_list *args_lst);
+void	free_stack(t_stack **stack);
+
+void	do_sa(t_stack **stack_a);
+void	do_sb(t_stack **stack_b);
+void	do_ss(t_stack **stack_a, t_stack **stack_b);
 
 // -utils
 void	print_err_msg(char *err_msg);
 void	print_pmt_msg(char *pmt_title, char *pmt_msg);
 void	free_double_arr(char **arr);
-t_dlist	*ft_dlstnew(long value);
-void	ft_dlstadd_back(t_dlist **dlst, t_dlist *new_node);
 
 #endif
