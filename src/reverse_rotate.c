@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_err_msg.c                                    :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 16:59:29 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/29 16:59:37 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/07 18:56:49 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/07 18:56:51 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	print_err_msg(char *err_msg)
+static void	reverse_rotate(t_stack **stack)
 {
-	write(STDERR_FILENO, BOLD, ft_strlen(BOLD));
-	write(STDERR_FILENO, RED_COLOR, ft_strlen(RED_COLOR));
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, RESET_COLOR, ft_strlen(RESET_COLOR));
-	write(STDERR_FILENO, REGULAR, ft_strlen(REGULAR));
-	write(STDERR_FILENO, err_msg, ft_strlen(err_msg));
+	*stack = (*stack)->next;
+}
+
+void	do_rra(t_stack **stack_a)
+{
+	reverse_rotate(stack_a);
+	ft_putstr_fd("rra\n", STDOUT_FILENO);
+}
+
+void	do_rrb(t_stack **stack_b)
+{
+	reverse_rotate(stack_b);
+	ft_putstr_fd("rrb\n", STDOUT_FILENO);
+}
+
+void	do_rrr(t_stack **stack_a, t_stack **stack_b)
+{
+	reverse_rotate(stack_a);
+	reverse_rotate(stack_b);
+	ft_putstr_fd("rrr\n", STDOUT_FILENO);
 }

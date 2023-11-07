@@ -12,6 +12,54 @@
 
 #include "../includes/push_swap.h"
 
+int	handle_error(t_stack **stack_a, t_stack **stack_b, t_list **args_lst)
+{
+	if (*stack_a)
+		free_stack(stack_a);
+	if (*stack_b)
+		free_stack(stack_b);
+	if (*args_lst)
+		ft_lstclear(args_lst, free);
+	return (0);
+}
+
+void	print_stack(t_stack *stack, size_t stack_size)
+{
+	int	i;
+
+	i = 0;
+	while (i < stack_size)
+	{
+		ft_printf("%d", stack->num);
+		i++;
+		if (i != stack_size)
+			ft_printf(" -> ");
+		stack = stack->next;
+	}
+	ft_printf("\n\n");
+}
+
+void	run_tests(t_stack *stack_a, t_stack *stack_b, size_t stack_size)
+{
+	ft_printf("stack_a: ");
+	print_stack(stack_a, stack_size);
+	ft_printf("stack_b: ");
+	print_stack(stack_b, stack_size);
+	do_sa(&stack_a);
+	do_pb(&stack_a, &stack_b);
+	do_pb(&stack_a, &stack_b);
+	do_pb(&stack_a, &stack_b);
+	do_pb(&stack_a, &stack_b);
+	do_pa(&stack_a, &stack_b);
+	do_pa(&stack_a, &stack_b);
+	do_pa(&stack_a, &stack_b);
+	do_pa(&stack_a, &stack_b);
+	ft_printf("stack_a: ");
+	print_stack(stack_a, stack_size);
+	ft_printf("stack_b: ");
+	print_stack(stack_b, stack_size);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*args_lst;
@@ -27,42 +75,14 @@ int	main(int argc, char **argv)
 	}
 	args_lst = parse_argv((argc - 1), (argv + 1));
 	if (!is_argv_valid(args_lst))
-	{
-		ft_lstclear(&args_lst, free);
-		return (0);
-	}
+		return (handle_error(&stack_a, &stack_b, &args_lst));
 	stack_size = (argc - 1);
-	stack_a = init_stack(stack_size);
-	if (!stack_a)
-	{
-		ft_lstclear(&args_lst, free);
-		return (0);
-	}
+	if (!init_stacks(&stack_a, &stack_b, stack_size))
+		return (handle_error(&stack_a, &stack_b, &args_lst));
 	fill_stack(&stack_a, args_lst);
 	ft_lstclear(&args_lst, free);
-		
-	// print stack values
-	t_stack *temp1 = stack_a;
-	int i = 0;
-	while (i < stack_size)
-	{
-		ft_printf("%d -> ", temp1->num);
-		temp1 = temp1->next;
-		i++;
-	}
-	ft_printf("\n\n");
-	do_sa(&stack_a);
-	t_stack *temp2 = stack_a;
-	i = 0;
-	while (i < stack_size)
-	{
-		ft_printf("%d -> ", temp2->num);
-		temp2 = temp2->next;
-		i++;
-	}
-	ft_printf("\n\n");
-
-	// free on exit
+	run_tests(stack_a, stack_b, stack_size);
 	free_stack(&stack_a);
+	free_stack(&stack_b);
 	return (1);
 }

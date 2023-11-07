@@ -45,6 +45,7 @@
 // structures
 typedef struct s_stack
 {
+	int				unset;
 	long			num;
 	struct s_stack	*prev;
 	struct s_stack	*next;
@@ -55,12 +56,24 @@ typedef struct s_stack
 t_list	*parse_argv(int argc, char **argv);
 int		is_argv_valid(t_list *args);
 t_stack	*init_stack(size_t size);
+int		init_stacks(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
 void	fill_stack(t_stack **stack, t_list *args_lst);
 void	free_stack(t_stack **stack);
 
 void	do_sa(t_stack **stack_a);
 void	do_sb(t_stack **stack_b);
 void	do_ss(t_stack **stack_a, t_stack **stack_b);
+
+void	do_ra(t_stack **stack_a);
+void	do_rb(t_stack **stack_b);
+void	do_rr(t_stack **stack_a, t_stack **stack_b);
+
+void	do_rra(t_stack **stack_a);
+void	do_rrb(t_stack **stack_b);
+void	do_rrr(t_stack **stack_a, t_stack **stack_b);
+
+void	do_pa(t_stack **stack_a, t_stack **stack_b);
+void	do_pb(t_stack **stack_b, t_stack **stack_a);
 
 // -utils
 void	print_err_msg(char *err_msg);

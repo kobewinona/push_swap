@@ -45,6 +45,7 @@ t_stack	*init_stack(size_t size)
 	while (i < size)
 	{
 		new_node = (t_stack *)malloc(sizeof(t_stack));
+		new_node->unset = TRUE;
 		if (!new_node)
 		{
 			free_stack(&stack);

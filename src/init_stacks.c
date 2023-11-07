@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_err_msg.c                                    :+:      :+:    :+:   */
+/*   init_stacks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 16:59:29 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/29 16:59:37 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/07 19:04:44 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/07 19:04:48 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	print_err_msg(char *err_msg)
+int	init_stacks(t_stack **stack_a, t_stack **stack_b, size_t stack_size)
 {
-	write(STDERR_FILENO, BOLD, ft_strlen(BOLD));
-	write(STDERR_FILENO, RED_COLOR, ft_strlen(RED_COLOR));
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, RESET_COLOR, ft_strlen(RESET_COLOR));
-	write(STDERR_FILENO, REGULAR, ft_strlen(REGULAR));
-	write(STDERR_FILENO, err_msg, ft_strlen(err_msg));
+	*stack_a = init_stack(stack_size);
+	if (!*stack_a)
+		return (FALSE);
+	*stack_b = init_stack(stack_size);
+	if (!*stack_a)
+	{
+		free_stack(stack_a);
+		return (FALSE);
+	}
+	return (TRUE);
 }
