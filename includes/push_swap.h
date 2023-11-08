@@ -58,6 +58,7 @@ int		is_argv_valid(t_list *args);
 t_stack	*init_stack(size_t size);
 int		init_stacks(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
 void	fill_stack(t_stack **stack, t_list *args_lst);
+void	print_stack(t_stack *stack);
 void	free_stack(t_stack **stack);
 
 void	do_sa(t_stack **stack_a);
@@ -74,6 +75,9 @@ void	do_rrr(t_stack **stack_a, t_stack **stack_b);
 
 void	do_pa(t_stack **stack_a, t_stack **stack_b);
 void	do_pb(t_stack **stack_b, t_stack **stack_a);
+
+// void	sort_three(t_stack **stack_a);
+void	sort_three(t_stack **stack_a, size_t stack_size);
 
 // -utils
 void	print_err_msg(char *err_msg);

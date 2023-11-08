@@ -14,7 +14,7 @@
 
 static void	rotate(t_stack **stack)
 {
-	*stack = (*stack)->prev;
+	*stack = (*stack)->next;
 }
 
 void	do_ra(t_stack **stack_a)

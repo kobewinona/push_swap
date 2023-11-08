@@ -20,16 +20,17 @@ static void	swap(t_stack **stack)
 
 	if (!*stack || !(*stack)->next || (*stack)->next->unset)
 		return ;
-	*stack = (*stack)->prev->prev;
 	first = *stack;
 	second = first->next;
 	last = first->prev;
 	first->next = second->next;
+	first->prev = second;
 	second->next = first;
 	second->prev = last;
 	last->next = second;
+	if (first->next == last)
+		last->prev = first;
 	*stack = second;
-	*stack = (*stack)->next->next;
 }
 
 void	do_sa(t_stack **stack_a)
