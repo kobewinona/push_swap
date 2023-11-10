@@ -12,12 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-void	print_err_msg(char *err_msg)
+void	print_err_msg(void)
 {
-	write(STDERR_FILENO, BOLD, ft_strlen(BOLD));
-	write(STDERR_FILENO, RED_COLOR, ft_strlen(RED_COLOR));
-	write(STDERR_FILENO, "Error: ", 7);
-	write(STDERR_FILENO, RESET_COLOR, ft_strlen(RESET_COLOR));
-	write(STDERR_FILENO, REGULAR, ft_strlen(REGULAR));
-	write(STDERR_FILENO, err_msg, ft_strlen(err_msg));
+	write(STDERR_FILENO, "Error\n", 6);
 }

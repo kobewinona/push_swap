@@ -23,8 +23,7 @@ static int	is_arg_int(char	*arg)
 	{
 		if (!ft_isdigit(arg[i]))
 		{
-			print_err_msg(INVALID_ARGS);
-			print_pmt_msg(ERROR_CAUSE_PROMPT, NOT_INT);
+			print_err_msg();
 			return (FALSE);
 		}
 		i++;
@@ -39,8 +38,7 @@ static int	is_arg_bigger_than_int(char	*arg)
 	num = ft_atol(arg);
 	if (num > INT_MAX || num < INT_MIN)
 	{
-		print_err_msg(INVALID_ARGS);
-		print_pmt_msg(ERROR_CAUSE_PROMPT, BIGGER_THAN_INT);
+		print_err_msg();
 		return (FALSE);
 	}
 	return (TRUE);
@@ -55,8 +53,7 @@ static int	is_dublicated(char *str1, char *str2)
 	num2 = ft_atoi(str2);
 	if (num1 == num2)
 	{
-		print_err_msg(INVALID_ARGS);
-		print_pmt_msg(ERROR_CAUSE_PROMPT, DUBLICATED);
+		print_err_msg();
 		return (TRUE);
 	}
 	return (FALSE);

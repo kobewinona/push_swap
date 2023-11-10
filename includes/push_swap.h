@@ -76,12 +76,10 @@ void	do_rrr(t_stack **stack_a, t_stack **stack_b);
 void	do_pa(t_stack **stack_a, t_stack **stack_b);
 void	do_pb(t_stack **stack_b, t_stack **stack_a);
 
-// void	sort_three(t_stack **stack_a);
 void	sort_three(t_stack **stack_a, size_t stack_size);
 
 // -utils
-void	print_err_msg(char *err_msg);
-void	print_pmt_msg(char *pmt_title, char *pmt_msg);
+void	print_err_msg(void);
 void	free_double_arr(char **arr);
 
 #endif

@@ -23,8 +23,7 @@ static void	handle_split_argv(t_list **args, char **split_argv)
 		content = ft_strdup(split_argv[i]);
 		if (!content)
 		{
-			print_err_msg(UNKNOWN_ERROR);
-			print_pmt_msg(RESTART_PROMPT, "");
+			print_err_msg();
 			free_double_arr(split_argv);
 			ft_lstclear(args, free);
 			exit(1);
@@ -47,8 +46,7 @@ t_list	*parse_argv(int argc, char **argv)
 		split_argv = ft_split(argv[i++], ' ');
 		if (!split_argv)
 		{
-			print_err_msg(UNKNOWN_ERROR);
-			print_pmt_msg(RESTART_PROMPT, "");
+			print_err_msg();
 			exit(1);
 		}
 		handle_split_argv(&args, split_argv);
