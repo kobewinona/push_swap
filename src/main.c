@@ -12,49 +12,46 @@
 
 #include "../includes/push_swap.h"
 
-int	handle_error(t_stack **stack_a, t_stack **stack_b, t_list **args_lst)
-{
-	if (*stack_a)
-		free_stack(stack_a);
-	if (*stack_b)
-		free_stack(stack_b);
-	if (*args_lst)
-		ft_lstclear(args_lst, free);
-	return (0);
-}
-
 void	print_stack(t_stack *stack)
 {
 	t_stack	*current;
 
-	current = stack;
-	while (1)
+	if (stack)
 	{
-		ft_printf("%d", current->num);
-		current = current->next;
-		if (current != stack)
-			ft_printf(" -> ");
-		else
-			break ;
+		current = stack;
+		while (1)
+		{
+			ft_printf("%d", current->num);
+			current = current->next;
+			if (current != stack)
+			{
+				ft_printf(" -> ");
+			}
+			else
+				break ;
+		}
+		ft_printf("\n\n");
 	}
-	ft_printf("\n\n");
 }
 
 void	reverse_print_stack(t_stack *stack)
 {
 	t_stack	*current;
 
-	current = stack;
-	while (1)
+	if (stack)
 	{
-		ft_printf("%d", current->num);
-		current = current->prev;
-		if (current != stack)
-			ft_printf(" <- ");
-		else
-			break ;
+		current = stack;
+		while (1)
+		{
+			ft_printf("%d", current->num);
+			current = current->prev;
+			if (current != stack)
+				ft_printf(" <- ");
+			else
+				break ;
+		}
+		ft_printf("\n\n");
 	}
-	ft_printf("\n\n");
 }
 
 void	run_tests(t_stack *stack_a, t_stack *stack_b, size_t stack_size)
@@ -122,15 +119,20 @@ int	main(int argc, char **argv)
 	if (!is_argv_valid(args_lst))
 		return (handle_error(&stack_a, &stack_b, &args_lst));
 	stack_size = (argc - 1);
-	if (!init_stacks(&stack_a, &stack_b, stack_size))
+	stack_a = init_stack(stack_size);
+	if (!stack_a)
 		return (handle_error(&stack_a, &stack_b, &args_lst));
 	fill_stack(&stack_a, args_lst);
 	ft_lstclear(&args_lst, free);
-	// print_stack(stack_a);
+	if (is_stack_sorted(stack_a))
+		return (1);
+	print_stack(stack_a);
 	// run_tests(stack_a, stack_b, stack_size);
-	sort_three(&stack_a, stack_size);
-	// print_stack(stack_a);
-	// do_sa(&stack_a);
+	sort_small(&stack_a, &stack_b, stack_size);
+	ft_printf("stack a: ");
+	print_stack(stack_a);
+	ft_printf("stack b: ");
+	print_stack(stack_b);
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (1);

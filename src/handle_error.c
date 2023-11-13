@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 17:30:50 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/30 17:30:52 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/13 15:25:26 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/13 15:25:27 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*init_stack(size_t size)
+int	handle_error(t_stack **stack_a, t_stack **stack_b, t_list **args_lst)
 {
-	t_stack	*stack;
-	t_stack	*new_node;
-	int		i;
-
-	stack = NULL;
-	i = 0;
-	while (i < size)
-	{
-		new_node = (t_stack *)malloc(sizeof(t_stack));
-		new_node->unset = TRUE;
-		if (!new_node)
-		{
-			free_stack(&stack);
-			return (NULL);
-		}
-		stackadd_front(&stack, new_node);
-		i++;
-	}
-	return (stack);
+	if (*stack_a)
+		free_stack(stack_a);
+	if (*stack_b)
+		free_stack(stack_b);
+	if (*args_lst)
+		ft_lstclear(args_lst, free);
+	return (0);
 }

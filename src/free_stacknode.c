@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   free_stacknode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 17:30:50 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/30 17:30:52 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/13 15:45:37 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/13 15:45:38 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*init_stack(size_t size)
+void	free_stacknode(t_stack **stack)
 {
-	t_stack	*stack;
-	t_stack	*new_node;
-	int		i;
+	t_stack	*first;
+	t_stack	*second;
+	t_stack	*last;
 
-	stack = NULL;
-	i = 0;
-	while (i < size)
+	ft_printf("stack num %d\n", (*stack)->num);
+	if (*stack)
 	{
-		new_node = (t_stack *)malloc(sizeof(t_stack));
-		new_node->unset = TRUE;
-		if (!new_node)
+		first = *stack;
+		second = first->next;
+		last = first->prev;
+		if (first == last)
 		{
-			free_stack(&stack);
-			return (NULL);
+			free(first);
+			first = NULL;
+			return ;
 		}
-		stackadd_front(&stack, new_node);
-		i++;
+		second->prev = last;
+		last->next = second;
+		*stack = second;
+		free(first);
+		first = NULL;
 	}
-	return (stack);
 }

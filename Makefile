@@ -15,9 +15,9 @@ LIBS_DIR	= ./libs
 UTILS_DIR	= ./utils
 
 SRCS 		= $(addprefix $(SRCS_DIR)/, main.c parse_argv.c is_argv_valid.c \
-			init_stack.c init_stacks.c fill_stack.c free_stack.c \
+			init_stack.c init_stacks.c handle_error.c stackadd_front.c free_stacknode.c fill_stack.c is_stack_sorted.c free_stack.c \
 			swap.c push.c rotate.c reverse_rotate.c \
-			sort_three.c)
+			sort_small.c)
 UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c free_double_arr.c)
 OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 OBJS		+= $(patsubst $(UTILS_DIR)/%.c,$(OBJS_DIR)/%.o,$(UTILS_SRCS))

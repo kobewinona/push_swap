@@ -20,28 +20,6 @@
 # define FALSE 0
 # define ERROR -1
 
-// text colors
-# define RESET_COLOR "\033[0m"
-# define RED_COLOR "\033[31m"
-# define GREEN_COLOR "\033[32m"
-
-// text weight
-# define REGULAR "\e[0m"
-# define BOLD "\e[1m"
-
-// error messages
-# define NO_ARGS "No arguments are provided\n"
-# define INVALID_ARGS "Invalid arguments\n"
-# define UNKNOWN_ERROR "Unknown error occured\n"
-
-// prompt messages
-# define RESTART_PROMPT "*** Please try to restart the program\n"
-
-# define ERROR_CAUSE_PROMPT "*** What have caused this error:\n"
-# define NOT_INT "\t- some arguments aren't integers\n"
-# define BIGGER_THAN_INT "\t- some arguments are bigger than an integer\n"
-# define DUBLICATED "\t- some arguments are duplicates\n"
-
 // structures
 typedef struct s_stack
 {
@@ -57,7 +35,11 @@ t_list	*parse_argv(int argc, char **argv);
 int		is_argv_valid(t_list *args);
 t_stack	*init_stack(size_t size);
 int		init_stacks(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
+int		handle_error(t_stack **stack_a, t_stack **stack_b, t_list **args_lst);
+void	free_stacknode(t_stack **stack);
+void	stackadd_front(t_stack **stack, t_stack *node);
 void	fill_stack(t_stack **stack, t_list *args_lst);
+int		is_stack_sorted(t_stack *stack_a);
 void	print_stack(t_stack *stack);
 void	free_stack(t_stack **stack);
 
@@ -76,7 +58,7 @@ void	do_rrr(t_stack **stack_a, t_stack **stack_b);
 void	do_pa(t_stack **stack_a, t_stack **stack_b);
 void	do_pb(t_stack **stack_b, t_stack **stack_a);
 
-void	sort_three(t_stack **stack_a, size_t stack_size);
+void	sort_small(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
 
 // -utils
 void	print_err_msg(void);

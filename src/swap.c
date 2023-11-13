@@ -16,24 +16,27 @@ static void	swap(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
-	t_stack	*third;
 	t_stack	*last;
 
 	if (!*stack || !(*stack)->next || (*stack)->next->unset)
 		return ;
 	first = *stack;
 	second = first->next;
-	third = second->next;
 	last = first->prev;
-	first->next = second->next;
-	first->prev = second;
-	second->next = first;
-	second->prev = last;
-	last->next = second;
-	if (first->next == last)
-		last->prev = first;
+	if (last != second)
+	{
+		first->next = second->next;
+		second->prev = last;
+		last->next = second;
+		second->next->prev = first;
+	}
 	else
-		third->prev = first;
+	{
+		second->prev = first;
+		first->next = second;
+	}
+	second->next = first;
+	first->prev = second;
 	*stack = second;
 }
 
