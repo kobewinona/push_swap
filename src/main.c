@@ -126,14 +126,15 @@ int	main(int argc, char **argv)
 	ft_lstclear(&args_lst, free);
 	if (is_stack_sorted(stack_a))
 		return (1);
+	ft_printf("stack a: ");
 	print_stack(stack_a);
 	// run_tests(stack_a, stack_b, stack_size);
 	sort_small(&stack_a, &stack_b, stack_size);
-	ft_printf("stack a: ");
-	print_stack(stack_a);
-	ft_printf("stack b: ");
-	print_stack(stack_b);
+	// ft_printf("stack a: ");
+	// print_stack(stack_a);
+	// ft_printf("stack b: ");
+	// print_stack(stack_b);
 	free_stack(&stack_a);
-	free_stack(&stack_b);
+	// free_stack(&stack_b);
 	return (1);
 }

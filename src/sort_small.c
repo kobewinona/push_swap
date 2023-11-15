@@ -46,16 +46,24 @@ void	sort_small(t_stack **stack_a, t_stack **stack_b, size_t stack_size)
 	else
 	{
 		do_pb(stack_a, stack_b);
-		// print_stack(*stack_a);
-		// print_stack(*stack_b);
+		ft_printf("stack a: ");
+		print_stack(*stack_a);
+		ft_printf("stack b: ");
+		print_stack(*stack_b);
 		do_pb(stack_a, stack_b);
-		// print_stack(*stack_a);
-		// print_stack(*stack_b);
+		ft_printf("stack a: ");
+		print_stack(*stack_a);
+		ft_printf("stack b: ");
+		print_stack(*stack_b);
 		do_pa(stack_a, stack_b);
-		// print_stack(*stack_a);
-		// print_stack(*stack_b);
+		ft_printf("stack a: ");
+		print_stack(*stack_a);
+		ft_printf("stack b: ");
+		print_stack(*stack_b);
 		do_pa(stack_a, stack_b);
-		// print_stack(*stack_a);
-		// print_stack(*stack_b);
+		ft_printf("stack a: ");
+		print_stack(*stack_a);
+		ft_printf("stack b: ");
+		print_stack(*stack_b);
 	}
 }
