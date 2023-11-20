@@ -12,18 +12,12 @@
 
 #include "../includes/push_swap.h"
 
-static void push(t_stack **stack_dst, t_stack **stack_src)
+static void	remove_source_node(t_stack **stack_src)
 {
 	t_stack	*src_first;
 	t_stack	*src_second;
 	t_stack	*src_last;
-	t_stack	*dst_first;
-	t_stack	*dst_last;
 
-	if (!*stack_src || (*stack_src)->unset)
-		return ;
-	dst_first = *stack_dst;
-	dst_last = dst_first ? dst_first->prev : NULL;
 	src_first = *stack_src;
 	src_second = src_first->next;
 	src_last = src_first->prev;
@@ -35,19 +29,42 @@ static void push(t_stack **stack_dst, t_stack **stack_src)
 		src_second->prev = src_last;
 		*stack_src = src_second;
 	}
+}
+
+static void	add_to_dest(t_stack **stack_dst, t_stack *node)
+{
+	t_stack	*dst_first;
+	t_stack	*dst_last;
+
+	dst_first = *stack_dst;
+	if (dst_first)
+		dst_last = dst_first->prev;
+	else
+		dst_last = NULL;
 	if (dst_first)
 	{
-		src_first->next = dst_first;
-		src_first->prev = dst_last;
-		dst_first->prev = src_first;
-		dst_last->next = src_first;
+		node->next = dst_first;
+		node->prev = dst_last;
+		dst_first->prev = node;
+		dst_last->next = node;
 	}
 	else
 	{
-		src_first->next = src_first;
-		src_first->prev = src_first;
+		node->next = node;
+		node->prev = node;
 	}
-	*stack_dst = src_first;
+	*stack_dst = node;
+}
+
+static void	push(t_stack **stack_dst, t_stack **stack_src)
+{
+	t_stack	*src_first;
+
+	if (!*stack_src || (*stack_src)->unset)
+		return ;
+	src_first = *stack_src;
+	remove_source_node(stack_src);
+	add_to_dest(stack_dst, src_first);
 }
 
 void	do_pa(t_stack **stack_a, t_stack **stack_b)

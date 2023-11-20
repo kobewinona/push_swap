@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_stacknode.c                                   :+:      :+:    :+:   */
+/*   find_stack_min.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 15:45:37 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/11/13 15:45:38 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/16 15:58:45 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/16 15:58:46 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	free_stacknode(t_stack **stack)
+ssize_t	find_stack_min(t_stack *stack)
 {
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*last;
+	t_stack	*current;
+	ssize_t	min_num;
 
-	ft_printf("stack num %d\n", (*stack)->num);
-	if (*stack)
+	current = stack;
+	min_num = find_stack_max(stack);
+	while (1)
 	{
-		first = *stack;
-		second = first->next;
-		last = first->prev;
-		if (first == last)
-		{
-			free(first);
-			first = NULL;
-			return ;
-		}
-		second->prev = last;
-		last->next = second;
-		*stack = second;
-		free(first);
-		first = NULL;
+		if (current->index < min_num)
+			min_num = (ssize_t)current->index;
+		if (current->next == stack)
+			break ;
+		current = current->next;
 	}
+	return (min_num);
 }

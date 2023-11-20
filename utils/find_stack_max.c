@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_error.c                                     :+:      :+:    :+:   */
+/*   find_stack_max.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 15:25:26 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/11/13 15:25:27 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/16 16:00:13 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/16 16:00:14 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	handle_error(t_stack **stack_a, t_stack **stack_b, t_list **args_lst)
+ssize_t	find_stack_max(t_stack *stack)
 {
-	if (*stack_a)
-		free_stack(stack_a);
-	if (*stack_b)
-		free_stack(stack_b);
-	if (*args_lst)
-		ft_lstclear(args_lst, free);
-	print_err_msg();
-	return (0);
+	t_stack	*current;
+	ssize_t	max_num;
+
+	current = stack;
+	max_num = 0;
+	while (1)
+	{
+		if (current->index > max_num)
+			max_num = (ssize_t)current->index;
+		if (current->next == stack)
+			break ;
+		current = current->next;
+	}
+	return (max_num);
 }

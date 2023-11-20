@@ -24,24 +24,27 @@
 typedef struct s_stack
 {
 	int				unset;
-	long			num;
+	ssize_t			num;
+	int				index;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }					t_stack;
+typedef struct s_chunk
+{
+	ssize_t	start;
+	ssize_t	end;
+	ssize_t	size;
+}					t_chunk;
 
 // functions
+void	print_stack(t_stack *stack, char *stack_name, int index);
+
 // - src
 t_list	*parse_argv(int argc, char **argv);
 int		is_argv_valid(t_list *args);
-t_stack	*init_stack(size_t size);
-int		init_stacks(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
 int		handle_error(t_stack **stack_a, t_stack **stack_b, t_list **args_lst);
-void	free_stacknode(t_stack **stack);
-void	stackadd_front(t_stack **stack, t_stack *node);
-void	fill_stack(t_stack **stack, t_list *args_lst);
+void	fill_stack(t_stack **stack, t_list *args_lst, size_t stack_size);
 int		is_stack_sorted(t_stack *stack_a);
-void	print_stack(t_stack *stack);
-void	free_stack(t_stack **stack);
 
 void	do_sa(t_stack **stack_a);
 void	do_sb(t_stack **stack_b);
@@ -56,12 +59,23 @@ void	do_rrb(t_stack **stack_b);
 void	do_rrr(t_stack **stack_a, t_stack **stack_b);
 
 void	do_pa(t_stack **stack_a, t_stack **stack_b);
-void	do_pb(t_stack **stack_b, t_stack **stack_a);
+void	do_pb(t_stack **stack_a, t_stack **stack_b);
 
 void	sort_small(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
+void	sort_big(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
 
-// -utils
+// - utils
 void	print_err_msg(void);
+
 void	free_double_arr(char **arr);
+
+t_stack	*init_stack(size_t size);
+void	stackadd_front(t_stack **stack, t_stack *node);
+void	free_stack(t_stack **stack);
+
+t_chunk	*init_chunk(t_stack **stack, size_t stack_size);
+
+ssize_t	find_stack_min(t_stack *stack);
+ssize_t	find_stack_max(t_stack *stack);
 
 #endif

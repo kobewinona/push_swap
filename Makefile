@@ -15,10 +15,14 @@ LIBS_DIR	= ./libs
 UTILS_DIR	= ./utils
 
 SRCS 		= $(addprefix $(SRCS_DIR)/, main.c parse_argv.c is_argv_valid.c \
-			init_stack.c init_stacks.c handle_error.c stackadd_front.c free_stacknode.c fill_stack.c is_stack_sorted.c free_stack.c \
+			handle_error.c fill_stack.c is_stack_sorted.c \
 			swap.c push.c rotate.c reverse_rotate.c \
-			sort_small.c)
-UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c free_double_arr.c)
+			sort_small.c sort_big.c)
+UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c print_stack.c \
+			free_double_arr.c \
+			init_stack.c stackadd_front.c free_stack.c \
+			init_chunk.c \
+			find_stack_min.c find_stack_max.c)
 OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 OBJS		+= $(patsubst $(UTILS_DIR)/%.c,$(OBJS_DIR)/%.o,$(UTILS_SRCS))
 
@@ -35,13 +39,13 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o: $(UTILS_DIR)/%.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
-	
+
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
 clean: 
 	$(RM) $(OBJS_DIR)
-	
+
 fclean: clean
 	$(RM) $(NAME) $(ASAN_NAME)
 
