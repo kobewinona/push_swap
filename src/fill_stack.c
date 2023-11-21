@@ -14,9 +14,9 @@
 
 static void	sort_arr(long *arr, size_t size)
 {
-	int		i;
-	int		j;
-	long	temp;
+	size_t		i;
+	size_t		j;
+	long		temp;
 
 	i = 0;
 	while (i < size)
@@ -38,8 +38,8 @@ static void	sort_arr(long *arr, size_t size)
 
 static void	define_index(long *arr, t_stack **stack, size_t stack_size)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	t_stack	*current;
 
 	i = 0;

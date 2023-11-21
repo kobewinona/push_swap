@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   calculate_stack_size.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 17:30:50 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/30 17:30:52 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/20 21:47:40 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/20 21:47:41 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*init_stack(size_t size)
+int	calculate_stack_size(t_stack *stack)
 {
-	t_stack	*stack;
-	t_stack	*new_node;
-	size_t	i;
+	t_stack	*current;
+	int		size;
 
-	stack = NULL;
-	i = 0;
-	while (i < size)
+	current = stack;
+	size = 0;
+	while (current != NULL)
 	{
-		new_node = (t_stack *)malloc(sizeof(t_stack));
-		new_node->unset = TRUE;
-		if (!new_node)
-		{
-			free_stack(&stack);
-			return (NULL);
-		}
-		stackadd_front(&stack, new_node);
-		i++;
+		size++;
+		current = current->next;
+		if (current == stack)
+			break ;
 	}
-	return (stack);
+	return (size);
 }

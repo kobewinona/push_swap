@@ -16,6 +16,7 @@ static int	handle_split_argv(t_list **args, char **split_argv)
 {
 	char	*content;
 	int		i;
+	t_list	*new_node;
 
 	i = 0;
 	while (split_argv[i])
@@ -23,7 +24,10 @@ static int	handle_split_argv(t_list **args, char **split_argv)
 		content = ft_strdup(split_argv[i]);
 		if (!content)
 			return (0);
-		ft_lstadd_back(args, ft_lstnew(content));
+		new_node = ft_lstnew(content);
+		if (!new_node)
+			return (0);
+		ft_lstadd_back(args, new_node);
 		i++;
 	}
 	return (1);
@@ -36,6 +40,7 @@ t_list	*parse_argv(int argc, char **argv)
 	int		i;
 
 	i = 0;
+	args = NULL;
 	while (i < argc)
 	{
 		split_argv = ft_split(argv[i], ' ');

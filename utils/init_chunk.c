@@ -18,25 +18,19 @@ t_chunk	*init_chunk(t_stack **stack, size_t stack_size)
 	ssize_t	max_num;
 	t_chunk	*chunk;
 	ssize_t	chunks_amount;
-	// double	m;
-	// double	b;
-	// int		num_chunks;
 
 	chunk = (t_chunk *)malloc(sizeof(t_chunk));
 	if (!chunk)
 		return (NULL);
-	// m = 0.015;
-	// b = 3.5;
-	// num_chunks = (int)(m * stack_size + b);
-	// ft_printf("num_chunks %d\n", num_chunks);
+	chunks_amount = 0;
 	if (stack_size <= 100)
 		chunks_amount = 5;
-	else if (stack_size <= 500)
-		chunks_amount = 11;
+	else
+		chunks_amount = 10;
 	min_num = 1;
 	max_num = find_stack_max(*stack);
-	// chunk->size = (max_num - min_num) / num_chunks;
-	chunk->size = (max_num - min_num) / chunks_amount;
+	if (chunks_amount != 0)
+		chunk->size = (max_num - min_num) / chunks_amount;
 	if (chunk->size == 0)
 		chunk->size = 1;
 	chunk->start = min_num;

@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack.c                                       :+:      :+:    :+:   */
+/*   move_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 17:30:50 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/10/30 17:30:52 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/21 12:22:16 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/21 12:22:16 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-t_stack	*init_stack(size_t size)
+void	move_stack_a(int moves, t_stack **a, int stack_size)
 {
-	t_stack	*stack;
-	t_stack	*new_node;
-	size_t	i;
-
-	stack = NULL;
-	i = 0;
-	while (i < size)
+	if (moves < (stack_size / 2))
 	{
-		new_node = (t_stack *)malloc(sizeof(t_stack));
-		new_node->unset = TRUE;
-		if (!new_node)
-		{
-			free_stack(&stack);
-			return (NULL);
-		}
-		stackadd_front(&stack, new_node);
-		i++;
+		while (moves--)
+			do_ra(a);
 	}
-	return (stack);
+	else
+	{
+		moves = stack_size - moves;
+		while (moves--)
+			do_rra(a);
+	}
+}
+
+void	move_stack_b(int moves, t_stack **b, int stack_size)
+{
+	if (moves < (stack_size / 2))
+	{
+		while (moves--)
+			do_rb(b);
+	}
+	else
+	{
+		moves = stack_size - moves;
+		while (moves--)
+			do_rrb(b);
+	}
 }

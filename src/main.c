@@ -12,40 +12,51 @@
 
 #include "../includes/push_swap.h"
 
-static void	sort_stack(t_stack **stack_a, t_stack **stack_b, size_t stack_size)
+static t_list	*handle_arguments(int argc, char **argv, int *stack_size)
 {
-	if (stack_size <= 5)
-		sort_small(stack_a, stack_b, stack_size);
-	else
-		sort_big(stack_a, stack_b, stack_size);
+	t_list	*args_lst;
+
+	args_lst = parse_argv(argc, argv);
+	if (!args_lst)
+	{
+		print_err_msg();
+		return (NULL);
+	}
+	*stack_size = ft_lstsize(args_lst);
+	if (!is_argv_valid(args_lst))
+	{
+		ft_lstclear(&args_lst, free);
+		print_err_msg();
+		return (NULL);
+	}
+	return (args_lst);
 }
 
 int	main(int argc, char **argv)
 {
 	t_list	*args_lst;
-	size_t	stack_size;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	t_stack	*a;
+	t_stack	*b;
+	int		stack_size;
 
 	if (argc <= 1)
 		return (0);
-	args_lst = parse_argv((argc - 1), (argv + 1));
+	args_lst = handle_arguments((argc - 1), (argv + 1), &stack_size);
 	if (!args_lst)
-		return (handle_error(&stack_a, &stack_b, &args_lst));
-	stack_size = ft_lstsize(args_lst);
-	if (!is_argv_valid(args_lst))
-		return (handle_error(&stack_a, &stack_b, &args_lst));
-	stack_a = init_stack(stack_size);
-	if (!stack_a)
-		return (handle_error(&stack_a, &stack_b, &args_lst));
-	fill_stack(&stack_a, args_lst, stack_size);
+		return (0);
+	a = init_stack(stack_size);
+	if (!a)
+		return (handle_error(&a, &b, &args_lst));
+	fill_stack(&a, args_lst, stack_size);
 	ft_lstclear(&args_lst, free);
-	if (is_stack_sorted(stack_a))
+	if (is_stack_sorted(a))
 	{
-		free_stack(&stack_a);
+		free_stack(&a);
 		return (1);
 	}
-	sort_stack(&stack_a, &stack_b, stack_size);
-	free_stack(&stack_a);
+	// print_stack(a, "initial stack a", TRUE);
+	sort_stack(&a, &b, stack_size);
+	// print_stack(a, "final stack a", TRUE);
+	free_stack(&a);
 	return (1);
 }

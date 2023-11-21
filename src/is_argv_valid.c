@@ -40,7 +40,7 @@ static int	is_arg_bigger_than_int(char	*arg)
 	return (TRUE);
 }
 
-static int	is_dublicated(char *str1, char *str2)
+static int	is_arg_duplicated(char *str1, char *str2)
 {
 	long	num1;
 	long	num2;
@@ -52,11 +52,10 @@ static int	is_dublicated(char *str1, char *str2)
 	return (FALSE);
 }
 
-static int	is_args_dublicated(t_list *args)
+static int	is_args_duplicated(t_list *args)
 {
 	t_list	*current;
 	t_list	*next;
-	size_t	arg_len;
 
 	current = args;
 	while (current && current->next)
@@ -64,8 +63,7 @@ static int	is_args_dublicated(t_list *args)
 		next = current->next;
 		while (next && next->content)
 		{
-			arg_len = ft_strlen(current->content);
-			if (is_dublicated(current->content, next->content))
+			if (is_arg_duplicated(current->content, next->content))
 				return (TRUE);
 			next = next->next;
 		}
@@ -87,7 +85,7 @@ int	is_argv_valid(t_list *args)
 			return (FALSE);
 		curr_arg = curr_arg->next;
 	}
-	if (is_args_dublicated(args))
+	if (is_args_duplicated(args))
 		return (FALSE);
 	return (TRUE);
 }

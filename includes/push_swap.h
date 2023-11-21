@@ -15,7 +15,6 @@
 # include "libftprintf.h"
 
 // magic numbers
-# define NULL_TURM 1
 # define TRUE 1
 # define FALSE 0
 # define ERROR -1
@@ -31,14 +30,12 @@ typedef struct s_stack
 }					t_stack;
 typedef struct s_chunk
 {
-	ssize_t	start;
-	ssize_t	end;
-	ssize_t	size;
+	int	start;
+	int	end;
+	int	size;
 }					t_chunk;
 
 // functions
-void	print_stack(t_stack *stack, char *stack_name, int index);
-
 // - src
 t_list	*parse_argv(int argc, char **argv);
 int		is_argv_valid(t_list *args);
@@ -61,21 +58,27 @@ void	do_rrr(t_stack **stack_a, t_stack **stack_b);
 void	do_pa(t_stack **stack_a, t_stack **stack_b);
 void	do_pb(t_stack **stack_a, t_stack **stack_b);
 
-void	sort_small(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
-void	sort_big(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
+void	sort_stack(t_stack **a, t_stack **b, int stack_size);
+void	sort_more_than_five(t_stack **a, t_stack **b, int stack_size);
 
 // - utils
 void	print_err_msg(void);
+void	print_stack(t_stack *stack, char *stack_name, int index);
 
 void	free_double_arr(char **arr);
 
 t_stack	*init_stack(size_t size);
 void	stackadd_front(t_stack **stack, t_stack *node);
+int		calculate_stack_size(t_stack *stack);
 void	free_stack(t_stack **stack);
-
-t_chunk	*init_chunk(t_stack **stack, size_t stack_size);
-
 ssize_t	find_stack_min(t_stack *stack);
 ssize_t	find_stack_max(t_stack *stack);
+int		count_moves_to_chunk_fwd(t_stack *stack, t_chunk *chunk);
+int		count_moves_to_chunk_bwd(t_stack *stack, t_chunk *chunk);
+int		count_moves_to_index_fwd(t_stack *stack, int target_index);
+int		count_moves_to_index_bwd(t_stack *stack, int target_index);
+void	move_stack_a(int moves, t_stack **a, int stack_size);
+void	move_stack_b(int moves, t_stack **b, int stack_size);
+t_chunk	*init_chunk(t_stack **stack, size_t stack_size);
 
 #endif
