@@ -10,6 +10,11 @@ push_swap_asan
 # checker
 checker_Max
 
+# tester
+push_swap_test.sh
+traces.txt
+./log_error
+
 # rest
 .DS_store
 *.txt

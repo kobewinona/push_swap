@@ -12,6 +12,24 @@
 
 #include "../includes/push_swap.h"
 
+static void	define_min_sorted_index(t_stack **stack, t_chunk *chunk)
+{
+	t_stack	*current;
+
+	current = (*stack)->prev;
+	chunk->min_sorted = find_stack_max(*stack);
+	while (current->index != chunk->min_sorted)
+		current = current->prev;
+	while (1)
+	{
+		if (current->index == (chunk->min_sorted - 1))
+			chunk->min_sorted = current->index;
+		current = current->prev;
+		if (current == *stack)
+			break ;
+	}
+}
+
 t_chunk	*init_chunk(t_stack **stack, size_t stack_size)
 {
 	ssize_t	min_num;
@@ -35,5 +53,6 @@ t_chunk	*init_chunk(t_stack **stack, size_t stack_size)
 		chunk->size = 1;
 	chunk->start = min_num;
 	chunk->end = chunk->size;
+	define_min_sorted_index(stack, chunk);
 	return (chunk);
 }

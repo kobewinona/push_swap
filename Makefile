@@ -17,7 +17,7 @@ UTILS_DIR	= ./utils
 
 SRCS 		= $(addprefix $(SRCS_DIR)/, main.c parse_argv.c is_argv_valid.c \
 			swap.c push.c rotate.c reverse_rotate.c \
-			fill_stack.c sort_stack.c sort_more_than_five.c count_moves.c move_stack.c)
+			fill_stack.c sort_stack.c sort_more_than_five.c count_moves.c make_moves.c)
 UTILS_SRCS	= $(addprefix $(UTILS_DIR)/, print_err_msg.c print_stack.c \
 			handle_error.c free_double_arr.c \
 			init_chunk.c init_stack.c stackadd_front.c free_stack.c \

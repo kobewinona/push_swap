@@ -18,6 +18,8 @@ static void	push_to_a(t_stack **a, t_stack **b)
 	int		target_index;
 	int		moves;
 
+	moves = count_moves_to_index(*a, find_stack_min(*a));
+	move_stack_a(moves, a, calculate_stack_size(*a));
 	while (*b)
 	{
 		current = *b;
@@ -38,13 +40,15 @@ void	sort_more_than_five(t_stack **a, t_stack **b, int stack_size)
 	int		moves;
 
 	chunk = init_chunk(a, stack_size);
-	while (*a)
+	while (*a && find_stack_min(*a) < chunk->min_sorted)
 	{
 		moves = count_moves_to_chunk(*a, chunk, stack_size);
 		if (moves >= stack_size)
 		{
 			chunk->start = chunk->end;
 			chunk->end = chunk->end + chunk->size;
+			if (chunk->end >= chunk->min_sorted)
+				chunk->end = chunk->min_sorted - 1;
 			continue ;
 		}
 		move_stack_a(moves, a, stack_size);

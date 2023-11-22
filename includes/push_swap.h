@@ -25,6 +25,7 @@ typedef struct s_stack
 	int				unset;
 	ssize_t			num;
 	int				index;
+	int				min_sorted;
 	struct s_stack	*prev;
 	struct s_stack	*next;
 }					t_stack;
@@ -32,6 +33,7 @@ typedef struct s_chunk
 {
 	int	start;
 	int	end;
+	int	min_sorted;
 	int	size;
 }					t_chunk;
 

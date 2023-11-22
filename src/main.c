@@ -54,9 +54,7 @@ int	main(int argc, char **argv)
 		free_stack(&a);
 		return (1);
 	}
-	// print_stack(a, "initial stack a", TRUE);
 	sort_stack(&a, &b, stack_size);
-	// print_stack(a, "final stack a", TRUE);
 	free_stack(&a);
 	return (1);
 }
