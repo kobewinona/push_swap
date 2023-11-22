@@ -24,7 +24,7 @@ static void	push_to_b(t_stack **a, t_stack **b)
 	while (count < 2)
 	{
 		current = *a;
-		moves = count_moves_to_index_fwd(current, target_index);
+		moves = count_moves_to_index(current, target_index);
 		move_stack_a(moves, a, calculate_stack_size(*a));
 		do_pb(a, b);
 		target_index = 2;

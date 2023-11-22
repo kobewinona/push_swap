@@ -1,44 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_moves.c                                      :+:      :+:    :+:   */
+/*   make_moves.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dklimkin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 12:01:58 by dklimkin          #+#    #+#             */
-/*   Updated: 2023/11/21 12:01:59 by dklimkin         ###   ########.fr       */
+/*   Created: 2023/11/22 13:46:34 by dklimkin          #+#    #+#             */
+/*   Updated: 2023/11/22 13:46:35 by dklimkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	count_moves_to_chunk(t_stack *stack, t_chunk *chunk, int stack_size)
+void	move_stack_a(int moves, t_stack **a, int stack_size)
 {
-	int	moves;
-
-	moves = 0;
-	if (chunk)
+	if (stack_size > 1)
 	{
-		while (moves <= stack_size)
+		if (moves < (stack_size / 2))
 		{
-			if (stack->index >= chunk->start && stack->index <= chunk->end)
-				break ;
-			stack = stack->next;
-			moves++;
+			while (moves--)
+				do_ra(a);
+		}
+		else
+		{
+			moves = stack_size - moves;
+			while (moves--)
+				do_rra(a);
 		}
 	}
-	return (moves);
 }
 
-int	count_moves_to_index(t_stack *stack, int target_index)
+void	move_stack_b(int moves, t_stack **b, int stack_size)
 {
-	int		moves;
-
-	moves = 0;
-	while (stack->index != target_index)
+	if (stack_size > 1)
 	{
-		stack = stack->next;
-		moves++;
+		if (moves < (stack_size / 2))
+		{
+			while (moves--)
+				do_rb(b);
+		}
+		else
+		{
+			moves = stack_size - moves;
+			while (moves--)
+				do_rrb(b);
+		}
 	}
-	return (moves);
 }

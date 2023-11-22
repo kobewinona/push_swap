@@ -26,7 +26,7 @@ t_chunk	*init_chunk(t_stack **stack, size_t stack_size)
 	if (stack_size <= 100)
 		chunks_amount = 5;
 	else
-		chunks_amount = 10;
+		chunks_amount = 11;
 	min_num = 1;
 	max_num = find_stack_max(*stack);
 	if (chunks_amount != 0)
