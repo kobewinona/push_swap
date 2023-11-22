@@ -30,6 +30,34 @@ static void	define_min_sorted_index(t_stack **stack, t_chunk *chunk)
 	}
 }
 
+// t_chunk	*init_chunk(t_stack **stack, size_t stack_size)
+// {
+// 	ssize_t	min_num;
+// 	ssize_t	max_num;
+// 	t_chunk	*chunk;
+// 	ssize_t	chunks_amount;
+
+// 	chunk = (t_chunk *)malloc(sizeof(t_chunk));
+// 	if (!chunk)
+// 		return (NULL);
+// 	chunks_amount = 0;
+// 	if (stack_size <= 100)
+// 		chunks_amount = 5;
+// 	else
+// 		chunks_amount = 11;
+// 	min_num = 1;
+// 	max_num = find_stack_max(*stack);
+// 	if (chunks_amount != 0)
+// 		chunk->size = (max_num - min_num) / chunks_amount;
+// 	if (chunk->size == 0)
+// 		chunk->size = 1;
+// 	define_min_sorted_index(stack, chunk);
+// 	// chunk->end = max_num;
+// 	chunk->end = chunk->min_sorted;
+// 	chunk->start = chunk->end - chunk->size;
+// 	return (chunk);
+// }
+
 t_chunk	*init_chunk(t_stack **stack, size_t stack_size)
 {
 	ssize_t	min_num;

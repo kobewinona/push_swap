@@ -12,23 +12,79 @@
 
 #include "../includes/push_swap.h"
 
-int	count_moves_to_chunk(t_stack *stack, t_chunk *chunk, int stack_size)
+static int	count_moves_fwd(t_stack *stack, t_chunk *chunk, int stack_size)
 {
-	int	moves;
+	t_stack	*current;
+	int		moves;
 
+	current = stack;
 	moves = 0;
-	if (chunk)
+	while (current->index < chunk->start || current->index > chunk->end)
 	{
-		while (moves <= stack_size)
-		{
-			if (stack->index >= chunk->start && stack->index <= chunk->end)
-				break ;
-			stack = stack->next;
-			moves++;
-		}
+		moves++;
+		current = current->next;
+		if (current == stack || moves == stack_size)
+			return (stack_size);
 	}
 	return (moves);
 }
+
+static int	count_moves_bwd(t_stack *stack, t_chunk *chunk, int stack_size)
+{
+	t_stack	*current;
+	int		moves;
+
+	current = stack;
+	moves = 0;
+	while (current->index < chunk->start || current->index > chunk->end)
+	{
+		moves++;
+		current = current->prev;
+		if (current == stack || moves == stack_size)
+			return (stack_size);
+	}
+	return (moves);
+}
+
+int	count_moves_to_chunk(t_stack *stack, t_chunk *chunk, int stack_size)
+{
+	t_stack	*current;
+	int		moves_fwd;
+	int		moves_bwd;
+	int		moves_res;
+
+	current = stack;
+	moves_fwd = 0;
+	moves_bwd = 0;
+	if (stack && chunk)
+	{
+		moves_fwd = count_moves_fwd(stack, chunk, stack_size);
+		moves_bwd = count_moves_bwd(stack, chunk, stack_size);
+	}
+	if (moves_fwd <= moves_bwd)
+		moves_res = moves_fwd;
+	else
+		moves_res = stack_size - moves_bwd;
+	return (moves_res);
+}
+
+// int	count_moves_to_chunk(t_stack *stack, t_chunk *chunk, int stack_size)
+// {
+// 	int	moves;
+
+// 	moves = 0;
+// 	if (chunk)
+// 	{
+// 		while (moves <= stack_size)
+// 		{
+// 			if (stack->index >= chunk->start && stack->index <= chunk->end)
+// 				break ;
+// 			stack = stack->next;
+// 			moves++;
+// 		}
+// 	}
+// 	return (moves);
+// }
 
 int	count_moves_to_index(t_stack *stack, int target_index)
 {

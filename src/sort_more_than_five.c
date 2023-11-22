@@ -18,8 +18,11 @@ static void	push_to_a(t_stack **a, t_stack **b)
 	int		target_index;
 	int		moves;
 
-	moves = count_moves_to_index(*a, find_stack_min(*a));
-	move_stack_a(moves, a, calculate_stack_size(*a));
+	if (*a)
+	{
+		moves = count_moves_to_index(*a, find_stack_min(*a));
+		move_stack_a(moves, a, calculate_stack_size(*a));
+	}
 	while (*b)
 	{
 		current = *b;
