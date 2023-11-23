@@ -68,24 +68,6 @@ int	count_moves_to_chunk(t_stack *stack, t_chunk *chunk, int stack_size)
 	return (moves_res);
 }
 
-// int	count_moves_to_chunk(t_stack *stack, t_chunk *chunk, int stack_size)
-// {
-// 	int	moves;
-
-// 	moves = 0;
-// 	if (chunk)
-// 	{
-// 		while (moves <= stack_size)
-// 		{
-// 			if (stack->index >= chunk->start && stack->index <= chunk->end)
-// 				break ;
-// 			stack = stack->next;
-// 			moves++;
-// 		}
-// 	}
-// 	return (moves);
-// }
-
 int	count_moves_to_index(t_stack *stack, int target_index)
 {
 	int		moves;
