@@ -1,11 +1,15 @@
-# vs code
-push_swap.dSYM/
+# IDE
 .vscode
+.idea
+*.dSYM
 
 # program
 a.out
 push_swap
 push_swap_asan
+
+#objects
+obj
 
 # checker
 checker_Max
